@@ -15,7 +15,7 @@ export const getters = {
 export const actions = {
   async login({ commit }, userInfo) {
     console.log("login")
-    const res = await this.$axios.post('http://localhost:3001/session', { session: userInfo }).catch(err => {
+    const res = await this.$axios.post('/api/v1/session', { session: userInfo }).catch(err => {
       console.log("error")
       commit("setAuthUser", null);
       return null

@@ -43,6 +43,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
   /*
   ** Axios module configuration
@@ -78,7 +79,15 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend(config, ctx) {
     }
-  }
+  },
+  proxy: {
+    '/api': {
+      target: 'http://localhost:3001',
+      pathRewrite: {
+        '^/api': '/api'
+      }
+    },
+  },
 }

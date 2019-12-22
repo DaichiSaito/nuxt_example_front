@@ -41,8 +41,16 @@ export default {
   },
   methods: {
     submit: async function() {
-      console.log("abc");
-      await this.$store.dispatch("auth/login", this.loginForm);
+      try {
+        const res = await this.$axios.post("/api/v1/session", {
+          session: this.loginForm
+        });
+        alert(`ログインしました。こんにちは${res.data.name}さん`);
+        this.$router.push({ path: "/profile" });
+      } catch (e) {
+        console.log(e.response.data.error);
+        alert("ログイン失敗");
+      }
     }
   }
 };
